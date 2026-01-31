@@ -1,0 +1,11 @@
+{
+  "name": "Knit Mini",
+  "short_name": "Knit",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "段数メインの編み物ミニ記録",
+  "lang": "ja",
+  "icons": []
+}

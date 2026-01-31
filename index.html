@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Knit Mini</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-row">
+      <div>
+        <h1 class="title">Knit Mini</h1>
+        <p class="subtitle">段数メイン＋毛糸在庫</p>
+      </div>
+
+      <nav class="tabs" aria-label="Navigation">
+        <button id="tab-projects" class="tab active" type="button">作品</button>
+        <button id="tab-yarn" class="tab" type="button">毛糸</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- PROJECTS -->
+    <section id="view-projects" class="view">
+      <div class="card">
+        <h2 class="h2">作品を追加</h2>
+
+        <form id="new-project-form" class="row" autocomplete="off">
+          <input id="project-name-input" class="input" type="text" placeholder="例：セーター（前身頃）" maxlength="40" />
+          <button class="btn primary" type="submit">追加</button>
+        </form>
+
+        <p class="hint">作品をタップすると段数カウンターが開きます。</p>
+      </div>
+
+      <div class="card">
+        <h2 class="h2">作品一覧</h2>
+        <ul id="project-list" class="list"></ul>
+        <p id="project-empty" class="hint muted" hidden>まだ作品がありません。上で追加してね。</p>
+      </div>
+    </section>
+
+    <!-- PROJECT DETAIL -->
+    <section id="view-detail" class="view" hidden>
+      <div class="card">
+        <button id="back-btn" class="btn ghost" type="button">← 戻る</button>
+
+        <h2 id="detail-title" class="h2"></h2>
+
+        <div class="counter">
+          <div class="counter-label">段数</div>
+          <div id="row-count" class="counter-value">0</div>
+
+          <div class="counter-actions">
+            <button id="minus-btn" class="btn" type="button">−1</button>
+            <button id="plus-btn" class="btn primary" type="button">＋1</button>
+          </div>
+
+          <div class="counter-actions">
+            <button id="minus10-btn" class="btn" type="button">−10</button>
+            <button id="plus10-btn" class="btn" type="button">＋10</button>
+          </div>
+
+          <div class="row small">
+            <button id="reset-btn" class="btn danger" type="button">リセット</button>
+            <button id="delete-btn" class="btn ghost danger" type="button">この作品を削除</button>
+          </div>
+
+          <p class="hint muted">※ 段数は0未満にならないようにしています。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- YARN INVENTORY -->
+    <section id="view-yarn" class="view" hidden>
+      <div class="card">
+        <h2 class="h2">毛糸を追加</h2>
+
+        <form id="new-yarn-form" class="stack" autocomplete="off">
+          <input id="yarn-name" class="input" type="text" placeholder="名前（例：ハマナカ ソノモノ）" maxlength="40" />
+
+          <div class="row">
+            <input id="yarn-color" class="input" type="text" placeholder="色（例：グレー / 12番）" maxlength="30" />
+            <input id="yarn-lot" class="input" type="text" placeholder="ロット（任意）" maxlength="20" />
+          </div>
+
+          <div class="row">
+            <input id="yarn-grams" class="input" type="number" inputmode="numeric" min="0" step="1" placeholder="在庫(g) 例：200" />
+            <input id="yarn-fiber" class="input" type="text" placeholder="素材（例：ウール100%）" maxlength="30" />
+          </div>
+
+          <!-- ★ 変更：用途（作品リストから選択） -->
+          <div class="row">
+            <select id="yarn-purpose-select" class="input">
+              <option value="">用途：選択（任意）</option>
+            </select>
+            <input id="yarn-purpose-custom" class="input" type="text" placeholder="自由入力（任意）例：プレゼント用" maxlength="60" />
+          </div>
+
+          <input id="yarn-notes" class="input" type="text" placeholder="メモ（太さ/針号数/購入店など）" maxlength="80" />
+
+          <!-- 写真 -->
+          <div class="stack">
+            <label class="hint" style="margin:0;">写真（任意）</label>
+            <input id="yarn-photo" class="input" type="file" accept="image/*" capture="environment" />
+            <p class="hint muted" style="margin:0;">
+              ※ iPhoneなら撮影が立ち上がります（環境によっては写真選択）
+            </p>
+          </div>
+
+          <button class="btn primary" type="submit">在庫に追加</button>
+        </form>
+
+        <p class="hint muted">※ 写真は容量節約のために圧縮して保存します</p>
+      </div>
+
+      <div class="card">
+        <h2 class="h2">在庫一覧</h2>
+        <ul id="yarn-list" class="list"></ul>
+        <p id="yarn-empty" class="hint muted" hidden>まだ毛糸がありません。上で追加してね。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footnote">Knit Mini • local only</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
